@@ -157,22 +157,6 @@ $(function() {
             code_sample = code_sample.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
             code_sample = code_sample.replace(/(console.log|alert)\(/g, "log("); // 'log' does nothing
 
-            // Check for some basic issues
-            if(
-                code_sample.indexOf("cookie") >= 0 ||
-                code_sample.indexOf("getElement") >= 0 ||
-                code_sample.indexOf("$(") >= 0 ||
-                code_sample.indexOf("_.") >= 0 ||
-                code_sample.indexOf("Backbone") >= 0 ||
-                code_sample.indexOf("localStorage") >= 0 ||
-                code_sample.indexOf("src") >= 0 || //Makes it hard to inject scripts
-                code_sample.match(/get|post|XMLHttp/i) || //hinder AJAX
-                code_sample.indexOf("new Date") >= 0
-            ) {
-                _.was_error("Contained potentially bad code");
-                return false;
-            }
-
             // Get the function name
             var fname_raw = code_sample.match(/(?:function (\w*)|var (\w*) = function)/),
                 fname = null;
